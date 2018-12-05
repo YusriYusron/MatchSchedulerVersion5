@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="times" type="id"/>
+    <item name="homeTeam" type="id"/>
+    <item name="scoreTeam" type="id"/>
+    <item name="awayTeam" type="id"/>
+    <item name="viewPagerLayout" type="id"/>
+</resources>
