@@ -3,21 +3,20 @@ package com.example.yusriyusron.matchscheduler.views
 import android.database.sqlite.SQLiteConstraintException
 import android.graphics.Color
 import android.os.Bundle
-import android.support.design.R.attr.colorAccent
-import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.example.yusriyusron.matchscheduler.R
+import com.example.yusriyusron.matchscheduler.R.drawable.ic_add_to_favorites
+import com.example.yusriyusron.matchscheduler.R.drawable.ic_added_to_favorites
+import com.example.yusriyusron.matchscheduler.R.id.add_to_favorite
+import com.example.yusriyusron.matchscheduler.R.menu.detail_menu
 import com.example.yusriyusron.matchscheduler.api.ApiRepository
 import com.example.yusriyusron.matchscheduler.api.TheSportDBApi
 import com.example.yusriyusron.matchscheduler.database.Favorite
@@ -33,10 +32,6 @@ import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.design.snackbar
-import com.example.yusriyusron.matchscheduler.R.menu.detail_menu
-import com.example.yusriyusron.matchscheduler.R.drawable.ic_add_to_favorites
-import com.example.yusriyusron.matchscheduler.R.drawable.ic_added_to_favorites
-import com.example.yusriyusron.matchscheduler.R.id.add_to_favorite
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
 class DetailView : AppCompatActivity() {
