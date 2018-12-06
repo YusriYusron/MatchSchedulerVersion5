@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val linearLayout = linearLayout {
+        linearLayout {
             lparams(width = matchParent, height = matchParent)
             orientation = LinearLayout.VERTICAL
             tabLayout = tabLayout {
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
     class PagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
         override fun getCount(): Int {
-            return 2
+            return 3
         }
 
         override fun getItem(p0: Int): Fragment {
@@ -50,10 +50,16 @@ class MainActivity : AppCompatActivity() {
                 bundle.putString("TYPE", "last")
                 fragment.arguments = bundle
                 return fragment
-            } else {
+            } else if (p0 == 1) {
                 val fragment = MatchFragment()
                 val bundle = Bundle()
                 bundle.putString("TYPE", "next")
+                fragment.arguments = bundle
+                return fragment
+            }else {
+                val fragment = MatchFragment()
+                val bundle = Bundle()
+                bundle.putString("TYPE", "favorite")
                 fragment.arguments = bundle
                 return fragment
             }
@@ -62,8 +68,10 @@ class MainActivity : AppCompatActivity() {
         override fun getPageTitle(position: Int): CharSequence? {
             if (position == 0) {
                 return "Last Match"
-            } else {
+            } else if(position == 1){
                 return "Next Match"
+            }else {
+                return "Favorite"
             }
         }
     }

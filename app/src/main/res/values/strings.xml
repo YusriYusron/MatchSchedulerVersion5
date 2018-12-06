@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MatchScheduler</string>
+    <string name="favorites">favorites</string>
 </resources>

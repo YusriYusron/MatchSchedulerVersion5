@@ -5,4 +5,5 @@
     <item name="scoreTeam" type="id"/>
     <item name="awayTeam" type="id"/>
     <item name="viewPagerLayout" type="id"/>
+    <item name="buttonFavorite" type="id"/>
 </resources>
