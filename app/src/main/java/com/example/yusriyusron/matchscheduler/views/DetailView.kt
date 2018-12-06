@@ -374,10 +374,14 @@ class DetailView : AppCompatActivity() {
                 true
             }
             add_to_favorite -> {
-                if (isFavorite) removeFromFavorite() else addToFavorite()
+                if(this::match.isInitialized){
+                    if (isFavorite) removeFromFavorite() else addToFavorite()
 
-                isFavorite = !isFavorite
-                setToFavorite()
+                    isFavorite = !isFavorite
+                    setToFavorite()
+                }else{
+                    toast("Match Not Initialized")
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -386,7 +390,7 @@ class DetailView : AppCompatActivity() {
 
     private fun addToFavorite(){
         try {
-            if (match == null) return
+            if (!this::match.isInitialized) return
             database.use {
                 insert(Favorite.TABLE_FAVORITE,
                     Favorite.MATCH_ID to match.eventId,
@@ -483,7 +487,6 @@ class DetailView : AppCompatActivity() {
             uiThread {
                 var imageView : ImageView
                 var team : Team
-//                try {
                     if(type == 0){
                         homeTeam = data.teams.get(0)
                         team = homeTeam
@@ -493,10 +496,7 @@ class DetailView : AppCompatActivity() {
                         team = awayTeam
                         imageView = awayTeamBadge
                     }
-                    Glide.with(applicationContext).load(team.teamBadge).into(imageView)
-//                }catch (e:NullPointerException){
-//
-//                }
+                Glide.with(applicationContext).load(team.teamBadge).into(imageView)
             }
         }
     }
