@@ -488,11 +488,11 @@ class DetailView : AppCompatActivity() {
                 var imageView : ImageView
                 var team : Team
                     if(type == 0){
-                        homeTeam = data.teams.get(0)
+                        homeTeam = data.teams[0]
                         team = homeTeam
                         imageView = homeTeamBadge
                     }else{
-                        awayTeam = data.teams.get(0)
+                        awayTeam = data.teams[0]
                         team = awayTeam
                         imageView = awayTeamBadge
                     }

@@ -4,14 +4,19 @@ import com.example.yusriyusron.matchscheduler.api.ApiRepository
 import com.example.yusriyusron.matchscheduler.api.TheSportDBApi
 import com.example.yusriyusron.matchscheduler.models.MatchResponse
 import com.example.yusriyusron.matchscheduler.models.TeamResponse
+import com.example.yusriyusron.matchscheduler.utils.CoroutineContextProvider
 import com.google.gson.Gson
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 class MainPresenter(
     private val view: MainView,
     private val apiRepository: ApiRepository,
-    private val gson: Gson
+    private val gson: Gson,
+    private val context: CoroutineContextProvider = CoroutineContextProvider()
 ) {
 
     fun getNextMatch() {
@@ -46,16 +51,15 @@ class MainPresenter(
 
     fun getTeamList() {
         view.showLoading()
-        doAsync {
-            val data = gson.fromJson(apiRepository
-                .doRequest(TheSportDBApi.getTeams()),
-                TeamResponse::class.java
-            )
 
-            uiThread {
-                view.hideLoading()
-                view.showTeamList(data.teams)
+        GlobalScope.async(context.main) {
+            val data = async {
+                gson.fromJson(apiRepository.doRequest(TheSportDBApi.getTeams()),
+                    TeamResponse::class.java
+                )
             }
+            view.hideLoading()
+            view.showTeamList(data.await().teams)
         }
     }
 }

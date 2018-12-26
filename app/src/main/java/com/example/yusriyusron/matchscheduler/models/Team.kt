@@ -15,8 +15,7 @@ data class Team(
     @SerializedName("strTeamBadge")
     var teamBadge: String? = null
 ):Parcelable {
-    constructor(parcel: Parcel) : this(parcel.readString()) {
-    }
+    constructor(parcel: Parcel) : this(parcel.readString())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(teamBadge)

@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
             lparams(width = matchParent, height = matchParent)
             orientation = LinearLayout.VERTICAL
             tabLayout = tabLayout {
+                id = R.id.tLayout
                 lparams(width = matchParent, height = wrapContent)
             }
             viewPager = viewPager({

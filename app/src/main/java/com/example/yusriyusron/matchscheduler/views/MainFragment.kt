@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import com.example.yusriyusron.matchscheduler.R
 import com.example.yusriyusron.matchscheduler.adapter.FavoriteAdapter
 import com.example.yusriyusron.matchscheduler.adapter.MainAdapter
 import com.example.yusriyusron.matchscheduler.api.ApiRepository
@@ -59,6 +60,7 @@ class MainFragment(private val type: String) : AnkoComponent<ViewGroup>, MainVie
                         lparams(width = matchParent, height = wrapContent)
 
                         listMatch = recyclerView {
+                            id = R.id.list_match
                             lparams(width = matchParent, height = wrapContent)
                         }
 
@@ -77,12 +79,12 @@ class MainFragment(private val type: String) : AnkoComponent<ViewGroup>, MainVie
         presenter = MainPresenter(this, request, gson)
         presenter.getTeamList()
 
-        if(type.equals("favorite")){
+        if (type.equals("favorite")) {
             favoriteAdapter = FavoriteAdapter(favorites, this)
             listMatch.adapter = favoriteAdapter
             swipeRefreshLayout.onRefresh { showFavorites() }
             showFavorites()
-        }else{
+        } else {
             adapter = MainAdapter(match, this)
             listMatch.adapter = adapter
             loadMatchList()
@@ -99,9 +101,9 @@ class MainFragment(private val type: String) : AnkoComponent<ViewGroup>, MainVie
         return view
     }
 
-    fun showFavorites(){
+    fun showFavorites() {
         favorites.clear()
-        context.database?.use {
+        context.database.use {
             swipeRefreshLayout.isRefreshing = false
             val result = select(Favorite.TABLE_FAVORITE)
             val favorite = result.parseList(classParser<Favorite>())
@@ -113,9 +115,9 @@ class MainFragment(private val type: String) : AnkoComponent<ViewGroup>, MainVie
     fun loadMatchList() {
         if (type.equals("next")) {
             presenter.getNextMatch()
-        } else if(type.equals("last")){
+        } else if (type.equals("last")) {
             presenter.getLastMatch()
-        }else{
+        } else {
             showFavorites()
         }
     }
